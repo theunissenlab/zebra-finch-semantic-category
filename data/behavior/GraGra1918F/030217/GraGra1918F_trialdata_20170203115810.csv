@@ -1,0 +1,2 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2017-02-03 12:09:28.503015,/home/fet/stimuli/test_categories_box3/nonreward/Tu_Stim_4_LblRed0613_060501070403.wav,Unrewarded,False,False,nan,False,6.0

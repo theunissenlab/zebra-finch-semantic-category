@@ -1,0 +1,7 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2023-03-22 10:18:00.796960,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box6/nonreward/DC_Stim_5_BlaBla0506_140212111320.wav,Unrewarded,False,False,nan,False,6.0
+1,2,2023-03-22 10:32:59.981809,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box6/reward/Te_Stim_6_WhiLbl0010_150701131209.wav,Rewarded,True,False,0:00:00.551309,False,6.0
+1,3,2023-03-22 10:33:00.534741,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box6/reward/Te_Stim_4_WhiLbl0010_251601200411.wav,Rewarded,True,False,0:00:04.549106,False,6.0
+1,4,2023-03-22 10:33:05.188708,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box6/reward/Te_Stim_8_WhiLbl0010_012713032416.wav,Rewarded,True,False,0:00:07.153880,False,6.0
+1,5,2023-03-22 10:33:12.561365,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box6/reward/Te_Stim_1_WhiLbl0010_082627032124.wav,Rewarded,True,False,0:00:05.029045,False,6.0
+1,6,2023-03-22 10:33:17.622734,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box6/nonreward/DC_Stim_6_BlaBla0506_111412051726.wav,Unrewarded,False,False,nan,False,6.0

@@ -1,0 +1,5 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2023-04-24 09:36:53.464074,/data/pecking_test/stimuli/confusing_categories/Te_Th/4v4/box5/nonreward/Te_Stim_5_LblRed0613_131527160904.wav,Unrewarded,True,True,0:00:01.226695,False,6.0
+1,2,2023-04-24 09:36:54.693736,/data/pecking_test/stimuli/confusing_categories/Te_Th/4v4/box5/nonreward/Te_Stim_10_WhiBlu4818_151810110509.wav,Unrewarded,True,True,0:00:01.019562,False,6.0
+1,3,2023-04-24 09:36:55.754376,/data/pecking_test/stimuli/confusing_categories/Te_Th/4v4/box5/nonreward/Te_Stim_5_WhiBlu4818_011913150318.wav,Unrewarded,True,True,0:00:01.369712,False,6.0
+1,4,2023-04-24 09:36:57.245374,/data/pecking_test/stimuli/confusing_categories/Te_Th/4v4/box5/reward/Th_Stim_8_HPiHPi4748_230302101922.wav,Rewarded,False,True,nan,True,6.0

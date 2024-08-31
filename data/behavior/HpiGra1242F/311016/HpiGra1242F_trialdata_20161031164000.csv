@@ -1,0 +1,9 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2016-10-31 16:40:03.214879,/home/fet/stimuli/shaping_categories/nonreward/BlaBla0506-NC-Operant.wav,Unrewarded,True,True,0:00:03.698303,False,5.997505668934241
+1,2,2016-10-31 16:40:06.920346,/home/fet/stimuli/shaping_categories/nonreward/BlaBla0506-NC-Operant.wav,Unrewarded,True,True,0:00:00.161630,False,5.997505668934241
+1,3,2016-10-31 16:40:07.088046,/home/fet/stimuli/shaping_categories/reward/BlaBla0506-DC-Operant.wav,Rewarded,True,False,0:00:01.001434,False,6.205873015873016
+1,4,2016-10-31 16:40:08.095657,/home/fet/stimuli/shaping_categories/nonreward/BlaBla0506-NC-Operant.wav,Unrewarded,True,True,0:00:00.129058,False,5.997505668934241
+1,5,2016-10-31 16:40:08.230807,/home/fet/stimuli/shaping_categories/nonreward/BlaBla0506-NC-Operant.wav,Unrewarded,True,True,0:00:01.800235,False,5.997505668934241
+1,6,2016-10-31 16:40:10.037040,/home/fet/stimuli/shaping_categories/nonreward/BlaBla0506-NC-Operant.wav,Unrewarded,True,True,0:00:00.141386,False,5.997505668934241
+1,7,2016-10-31 16:40:10.184623,/home/fet/stimuli/shaping_categories/nonreward/BlaBla0506-NC-Operant.wav,Unrewarded,True,True,0:00:00.833415,False,5.997505668934241
+1,8,2016-10-31 16:40:11.024165,/home/fet/stimuli/shaping_categories/reward/BlaBla0506-DC-Operant.wav,Rewarded,True,False,0:00:00.137338,False,6.205873015873016

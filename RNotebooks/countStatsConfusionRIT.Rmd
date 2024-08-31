@@ -1,0 +1,203 @@
+---
+title: "Count Stats Confusion RIT"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+R notebook to peform GLME on the confusion data divided along relative informative trials (RIT)
+Load the mixed effect library
+```{r libraries}
+library(lme4)
+
+```
+
+Read the data for the control day
+```{r data}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+fileInNew <- '../results/resultsControlNewR.csv'
+new_counts <- read.csv(fileInNew)
+new_counts$Re <- factor(new_counts$Re)
+new_counts$New <- factor('Y')
+
+fileInOld <- '../results/resultsControlOldR.csv'
+old_counts <- read.csv(fileInOld)
+old_counts$Re <- factor(old_counts$Re)
+old_counts$New <- factor('N')
+
+all_counts <- rbind(new_counts, old_counts)
+summary(all_counts)
+
+```
+
+Fit the models for control day as a function of informative trials for new and old vocalizers
+```{r models control rit}
+
+for (rit in unique(new_counts$RIT)) {
+  print(sprintf('RIT %d', rit))
+  
+  print('New vocalizers')
+  new_counts.rit <- new_counts[new_counts$RIT == rit, ]
+  # Remove subjects that don't have full data
+  subject.list <- unique(new_counts.rit$Subject)
+  for (sub in subject.list) {
+    if (nrow(new_counts.rit[new_counts.rit$Subject == sub, ]) != 2) {
+       new_counts.rit = new_counts.rit[new_counts.rit$Subject != sub, ]
+    }
+  }
+  subject.list <- unique(new_counts.rit$Subject) # recreating the list in case some subjects are deleted.
+  # The two models
+  print(sprintf('n = %d', nrow(new_counts.rit)/2))
+  if ( sum(new_counts.rit[new_counts.rit$Re == 'Y',]$Int) == 0 ) {
+    print('Warning: Interruption prop is zero for new stimuli. Adding an interrupted trial to 1 subject for both Re and NoRe')
+    sub.fix = subject.list[1]
+    new_counts.rit[new_counts.rit$Subject == sub.fix,]$Int = new_counts.rit[new_counts.rit$Subject == sub.fix,]$Int + 1
+    print(new_counts.rit)
+  }
+  null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1+Re) |Subject)', data = new_counts.rit, family = binomial)
+  base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1+Re)|Subject)', data = new_counts.rit, family = binomial)
+  # The statistical test
+  anova_res <- anova(null_model, base_model)
+  print(sprintf('Ch(%d) = %.2f p=%.3g', anova_res$Df[2], anova_res$Chisq[2], anova_res$Pr[2] ))
+  # The effect size
+  print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+        log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+        log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+  
+  print('Old vocalizers')
+  old_counts.rit <- old_counts[old_counts$RIT == rit, ]
+  # Remove subjects that don't have full data
+  subject.list <- unique(old_counts.rit$Subject)
+  for (sub in subject.list) {
+    if (nrow(old_counts.rit[old_counts.rit$Subject == sub, ]) != 2) {
+       old_counts.rit = old_counts.rit[old_counts.rit$Subject != sub, ]
+    }
+  }
+  subject.list <- unique(old_counts.rit$Subject)
+  
+  # The two models
+  print(sprintf('n = %d', nrow(old_counts.rit)/2))
+  if ( sum(old_counts.rit[old_counts.rit$Re == 'Y',]$Int) == 0 ) {
+    print('Warning: Interruption prop is zero for old stimuli - adding 1 intteruption for both Re and NoRe to one subject')
+    sub.fix = subject.list[1]
+    old_counts.rit[old_counts.rit$Subject == sub.fix,]$Int = old_counts.rit[old_counts.rit$Subject == sub.fix,]$Int + 1
+    print(old_counts.rit)
+  }
+  
+
+  null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)', data = old_counts.rit, family = binomial)
+  base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = old_counts.rit, family = binomial)
+  # The statistical test
+  anova_res <- anova(null_model, base_model)
+  print(sprintf('Ch(%d) = %.2f p=%.3g', anova_res$Df[2], anova_res$Chisq[2], anova_res$Pr[2] ))
+  # The effect size
+  print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+        log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+        log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+  
+  # Old vs New
+  all_counts.rit <- rbind(new_counts.rit, old_counts.rit)
+  base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1+Re)|Subject)', data = all_counts.rit, family = binomial)
+  new_model <- glmer('cbind(Int, NoInt) ~ Re*New + ((1+Re)|Subject)', data = all_counts.rit, family = binomial)
+  anova_res <- anova(base_model, new_model)
+  print(sprintf('Old vs New: Ch(%d) = %.2f p=%.3g', anova_res$Df[2], anova_res$Chisq[2], anova_res$Pr[2] ))
+ 
+}
+```
+
+Read the data for the confusing day
+```{r data confusing}
+fileInNew <- '../results/resultsConfusingNewR.csv'
+new_counts <- read.csv(fileInNew)
+new_counts$Re <- factor(new_counts$Re)
+new_counts$New <- factor('Y')
+
+fileInOld <- '../results/resultsConfusingOldR.csv'
+old_counts <- read.csv(fileInOld)
+old_counts$Re <- factor(old_counts$Re)
+old_counts$New <- factor('N')
+
+all_counts <- rbind(new_counts, old_counts)
+summary(all_counts)
+```
+RIT models for confusing day
+```{r models confusing}
+for (rit in unique(new_counts$RIT)) {
+  print(sprintf('RIT %d', rit))
+  
+  print('New vocalizers')
+  new_counts.rit <- new_counts[new_counts$RIT == rit, ]
+  # Remove subjects that don't have full data
+  subject.list <- unique(new_counts.rit$Subject)
+  for (sub in subject.list) {
+    if (nrow(new_counts.rit[new_counts.rit$Subject == sub, ]) != 2) {
+       new_counts.rit = new_counts.rit[new_counts.rit$Subject != sub, ]
+    }
+  }
+  subject.list <- unique(new_counts.rit$Subject)
+  
+  print(sprintf('n = %d', nrow(new_counts.rit)/2))
+  if ( sum(new_counts.rit[new_counts.rit$Re == 'Y',]$Int) == 0 ) {
+    print('Warning: Interruption prop is zero for new stimuli. Adding an interrupted trial to 1 subject for both Re and NoRe')
+    sub.fix = subject.list[1]
+    new_counts.rit[new_counts.rit$Subject == sub.fix,]$Int = new_counts.rit[new_counts.rit$Subject == sub.fix,]$Int + 1
+    print(new_counts.rit)
+  }
+  if ( (nrow(new_counts.rit) >= 4) & (nrow(unique(new_counts.rit['Int'])) !=1) ) {
+    # The two models
+    null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1+Re) |Subject)', data = new_counts.rit, family = binomial)
+    base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1+Re)|Subject)', data = new_counts.rit, family = binomial)
+    # The statistical test
+    anova_res <- anova(null_model, base_model)
+    print(sprintf('Ch(%d) = %.2f p=%.3g', anova_res$Df[2], anova_res$Chisq[2], anova_res$Pr[2] ))
+    # The effect size
+    print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+        log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+        log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+  }
+  print('Old vocalizers')
+  old_counts.rit <- old_counts[old_counts$RIT == rit, ]
+  # Remove subjects that don't have full data
+  subject.list <- unique(old_counts.rit$Subject)
+  for (sub in subject.list) {
+    if (nrow(old_counts.rit[old_counts.rit$Subject == sub, ]) != 2) {
+       old_counts.rit = old_counts.rit[old_counts.rit$Subject != sub, ]
+    }
+  }
+  subject.list <- unique(old_counts.rit$Subject)
+  
+    # The two models
+  print(sprintf('n = %d', nrow(old_counts.rit)/2))
+  if ( sum(old_counts.rit[old_counts.rit$Re == 'Y',]$Int) == 0 ) {
+    print('Warning: Interruption prop is zero for old stimuli - adding 1 intteruption for both Re and NoRe to one subject')
+    sub.fix = subject.list[1]
+    old_counts.rit[old_counts.rit$Subject == sub.fix,]$Int = old_counts.rit[old_counts.rit$Subject == sub.fix,]$Int + 1
+    print(old_counts.rit)
+  }
+  # The two models
+  if ( (nrow(old_counts.rit) >=4) & (nrow(unique(old_counts.rit['Int'])) !=1)  ) {
+    null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1+Re) |Subject)', data = old_counts.rit, family = binomial)
+    base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1+Re)|Subject)', data = old_counts.rit, family = binomial)
+    # The statistical test
+    anova_res <- anova(null_model, base_model)
+    print(sprintf('Ch(%d) = %.2f p=%.3g', anova_res$Df[2], anova_res$Chisq[2], anova_res$Pr[2] ))
+    # The effect size
+    print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+        log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+        log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+  }
+  # Old vs New
+   
+  all_counts.rit <- rbind(new_counts.rit, old_counts.rit)
+  if(nrow(all_counts.rit) >= 8) {
+    base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1+Re)|Subject)', data = all_counts.rit, family = binomial)
+    new_model <- glmer('cbind(Int, NoInt) ~ Re*New + ((1+Re)|Subject)', data = all_counts.rit, family = binomial)
+    anova_res <- anova(base_model, new_model)
+    print(sprintf('Old vs New: Ch(%d) = %.2f p=%.3g', anova_res$Df[2], anova_res$Chisq[2], anova_res$Pr[2] ))
+  }
+ 
+}
+```

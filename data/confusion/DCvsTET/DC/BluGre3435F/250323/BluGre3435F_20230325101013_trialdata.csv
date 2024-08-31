@@ -1,0 +1,2 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2023-03-25 10:10:22.437347,/data/pecking_test/stimuli/confusing_categories/DC_TE/1v1/box2/nonreward/Te_Stim_3_WhiLbl0010_132821031115.wav,Unrewarded,False,False,nan,False,6.0

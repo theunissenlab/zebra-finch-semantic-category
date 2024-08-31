@@ -1,0 +1,76 @@
+---
+title: "Count Stats"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+Load the mixed effect library
+```{r libraries}
+library(lme4)
+
+```
+
+Read the data
+```{r data}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+fileIn <- '../results/resultsBirdR.csv'
+post_counts <- read.csv(fileIn)
+
+post_counts$Sex <- factor(post_counts$Sex)
+post_counts$Call <- factor(post_counts$Call)
+post_counts$Re <- factor(post_counts$Re)
+
+summary(post_counts)
+```
+
+Fit the models
+```{r models}
+null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 +Re) |Bird)', data = post_counts, family = binomial)
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Bird)', data = post_counts, family = binomial)
+callType_model <- glmer('cbind(Int, NoInt) ~ Re*Call + ((1 + Re)|Bird)', data = post_counts, family = binomial)
+sex_model <- glmer('cbind(Int, NoInt) ~ Re*Sex + ((1 + Re)|Bird)', data = post_counts, family = binomial)
+
+```
+
+Averaged across all call types can birds tell one vs all other?
+```{r Re}
+# This is significant because Re changes interruption rates
+anova(null_model, base_model)
+
+# Look at effect size
+print(sprintf('Log2(OR) = %.2f +- %.3f (2SE)', log2(exp(-summary(base_model)$coef[2,1])),
+                  2*log2(exp(summary(base_model)$coef[2,2]))))
+
+```
+
+Is there a difference between males and females?
+```{r Sex}
+# Test for sex differences.
+anova(sex_model, base_model)
+```
+
+Is there an effect of call types?
+```{r CallType}
+# Test for call differences
+anova(callType_model, base_model)
+```
+
+
+Look at significance per call type
+```{r Calls}
+calls = unique(post_counts$Call)
+
+for (callType in calls)
+{
+    null_model <- glmer('cbind(Int, NoInt) ~ 1 + ((1+Re) |Bird)', data = post_counts,
+                        subset = (post_counts$Call == callType), family = binomial)
+    base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Bird)', data = post_counts, 
+                        subset = (post_counts$Call == callType), family = binomial)
+  
+    print(sprintf("-----------------Call %s----------------------------------", callType))
+    print(sprintf('Log2(OR) = %.2f +- %.3f (2SE)', log2(exp(-summary(base_model)$coef[2,1])),
+                  2*log2(exp(summary(base_model)$coef[2,2]))))
+    print(anova(base_model, null_model))
+}
+```

@@ -1,0 +1,114 @@
+---
+title: "Count Stats Confusion"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+R notebook to peform GLME on the confusion data
+Load the mixed effect library
+```{r libraries}
+library(lme4)
+
+```
+
+Read the data
+```{r data}
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+fileIn <- '../results/resultsConfusionR.csv'
+post_counts <- read.csv(fileIn)
+
+post_counts$Condition <- factor(post_counts$Condition)
+post_counts$trained_reward <- factor(post_counts$trained_reward)
+post_counts$Re <- factor(post_counts$Re)
+
+summary(post_counts)
+```
+
+Fit the models for learning period
+```{r models learning}
+null_model <- glmer('cbind(Int, NoInt) ~ 1 + (( 1 + Re) |Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'Learning')
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'Learning')
+
+anova(null_model, base_model)
+
+# Look at effect size
+print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+          log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+          log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+```
+
+Fit models for new vocalizers in congruant day
+```{r models new congruant}
+null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'new_congruant')
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'new_congruant')
+
+anova(null_model, base_model)
+
+# Look at effect size
+print('New vocalizers on congruant day')
+print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+          log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+          log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+```
+Old vocalizers on congruant day
+```{r models old congruant}
+null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'old_congruant')
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'old_congruant')
+
+anova(null_model, base_model)
+
+# Look at effect size
+print('Old vocalizers on congruant day')
+print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+          log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+          log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+```
+Is there a difference between old and new?
+```{r Congruent new vs old}
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = (post_counts$Condition == 'old_congruant') | (post_counts$Condition == 'new_congruant') )
+condition_model <- glmer('cbind(Int, NoInt) ~ Re*Condition + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = (post_counts$Condition == 'old_congruant') | (post_counts$Condition == 'new_congruant') )
+# Test for differences in new vs old
+anova(condition_model, base_model)
+```
+
+New confusing
+```{r models new confusing}
+null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'Confusing')
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'Confusing')
+
+anova(null_model, base_model)
+
+# Look at effect size
+print('New vocalizers on confusing day')
+print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+          log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+          log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+```
+
+Old Confusing
+```{r models old confusing}
+null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'Normal')
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = post_counts$Condition == 'Normal')
+
+anova(null_model, base_model)
+
+# Look at effect size
+print('Old vocalizers on confusing day')
+print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+          log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
+          log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+```
+
+Old vs New
+``` {r Incongruent new vs old}
+base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = (post_counts$Condition == 'Normal') | (post_counts$Condition == 'Confusing') )
+condition_model <- glmer('cbind(Int, NoInt) ~ Re*Condition + ((1 + Re)|Subject)', data = post_counts, family = binomial, subset = (post_counts$Condition == 'Normal') | (post_counts$Condition == 'Confusing') )
+# Test for differences in new vs old
+anova(condition_model, base_model)
+```
+

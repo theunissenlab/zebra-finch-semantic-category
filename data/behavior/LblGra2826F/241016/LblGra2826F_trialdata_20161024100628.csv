@@ -1,0 +1,21 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2016-10-24 10:06:35.234655,/home/fet/stimuli/test_categories_box5/nonreward/DC_Stim_3_HPiHPi4748_261907101804.wav,Unrewarded,True,True,0:00:01.830465,False,6.0
+1,2,2016-10-24 10:06:37.071499,/home/fet/stimuli/test_categories_box5/nonreward/Di_Stim_2_Unknown_11_020101020101.wav,Unrewarded,True,True,0:00:00.590341,False,6.0
+1,3,2016-10-24 10:06:37.666486,/home/fet/stimuli/test_categories_box5/reward/Ag_Stim_8_LblRed0613_072111102835.wav,Rewarded,True,False,0:00:00.277568,False,6.0
+1,4,2016-10-24 10:06:37.948234,/home/fet/stimuli/test_categories_box5/nonreward/LT_Stim_4_LblGre0001_111006050407.wav,Unrewarded,True,True,0:00:00.876441,False,6.0
+1,5,2016-10-24 10:06:38.828861,/home/fet/stimuli/test_categories_box5/nonreward/Di_Stim_10_PurRas20dd_040101010401.wav,Unrewarded,True,True,0:00:00.806777,False,6.0
+1,6,2016-10-24 10:06:39.639805,/home/fet/stimuli/test_categories_box5/nonreward/So_Stim_2_HPiHPi4748_231510.wav,Unrewarded,True,True,0:00:01.298082,False,6.0
+1,7,2016-10-24 10:06:40.942359,/home/fet/stimuli/test_categories_box5/nonreward/Th_Stim_3_LblRed0613_070612080516.wav,Unrewarded,True,True,0:00:02.067783,False,6.0
+1,8,2016-10-24 10:06:43.014602,/home/fet/stimuli/test_categories_box5/nonreward/Be_Stim_7_LblBlu6243_08_031806_02.wav,Unrewarded,True,True,0:00:01.015338,False,6.0
+1,9,2016-10-24 10:06:44.035984,/home/fet/stimuli/test_categories_box5/nonreward/Ne_Stim_1_WhiLbl0010_103635023437.wav,Unrewarded,True,True,0:00:00.668309,False,6.0
+1,10,2016-10-24 10:06:44.712233,/home/fet/stimuli/test_categories_box5/reward/Ag_Stim_8_WhiGra0114_010101010101.wav,Rewarded,True,False,0:00:00.417888,False,6.0
+1,11,2016-10-24 10:06:45.136223,/home/fet/stimuli/test_categories_box5/nonreward/DC_Stim_6_BlaLbl8026_230119372812.wav,Unrewarded,True,True,0:00:00.724717,False,6.0
+1,12,2016-10-24 10:06:45.867360,/home/fet/stimuli/test_categories_box5/nonreward/LT_Stim_1_LblGre0000_082102151005.wav,Unrewarded,True,True,0:00:01.081200,False,6.0
+1,13,2016-10-24 10:06:46.954434,/home/fet/stimuli/test_categories_box5/nonreward/Di_Stim_9_Unknown000_010201020201.wav,Unrewarded,True,True,0:00:00.139243,False,6.0
+1,14,2016-10-24 10:06:47.097639,/home/fet/stimuli/test_categories_box5/nonreward/Di_Stim_3_PurRas20dd_040101010404.wav,Unrewarded,True,True,0:00:00.999648,False,6.0
+1,15,2016-10-24 10:06:48.103436,/home/fet/stimuli/test_categories_box5/nonreward/Th_Stim_6_Unknown_11_080105110902.wav,Unrewarded,True,True,0:00:00.325432,False,6.0
+1,16,2016-10-24 10:06:48.433203,/home/fet/stimuli/test_categories_box5/nonreward/So_Stim_7_LblBla4419_090501.wav,Unrewarded,True,True,0:00:00.192203,False,6.0
+1,17,2016-10-24 10:06:48.629735,/home/fet/stimuli/test_categories_box5/nonreward/So_Stim_1_LblRed0613_041429.wav,Unrewarded,True,True,0:00:00.392899,False,6.0
+1,18,2016-10-24 10:06:49.026620,/home/fet/stimuli/test_categories_box5/nonreward/Tu_Stim_3_GreOra1817_140602051318.wav,Unrewarded,True,True,0:00:01.323171,False,6.0
+1,19,2016-10-24 10:06:50.354306,/home/fet/stimuli/test_categories_box5/nonreward/Th_Stim_3_HPiHPi4748_042618200709.wav,Unrewarded,True,True,0:00:00.138700,False,6.0
+1,20,2016-10-24 10:06:50.497133,/home/fet/stimuli/test_categories_box5/nonreward/Di_Stim_6_HPiHPi4748_030503050503.wav,Unrewarded,False,False,nan,False,6.0

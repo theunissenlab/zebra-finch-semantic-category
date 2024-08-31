@@ -1,0 +1,6 @@
+session,index,time,stimulus_name,condition_name,response,correct,rt,reward,max_wait
+1,1,2017-01-12 17:32:57.816707,/home/fet/stimuli/test_categories_box5/nonreward/Tu_Stim_4_LblRed0613_070604050801.wav,Unrewarded,False,False,nan,False,6.0
+1,2,2017-01-12 17:33:06.286793,/home/fet/stimuli/test_categories_box5/nonreward/Tu_Stim_9_BluRas61dd_040602090308.wav,Unrewarded,False,False,nan,False,6.0
+1,3,2017-01-12 17:37:28.870920,/home/fet/stimuli/test_categories_box5/nonreward/Di_Stim_3_BlaLbl8026_030102030303.wav,Unrewarded,False,False,nan,False,6.0
+1,4,2017-01-12 17:42:36.115285,/home/fet/stimuli/test_categories_box5/nonreward/Te_Stim_6_WhiRas44dd_091611060704.wav,Unrewarded,False,False,nan,False,6.0
+1,5,2017-01-12 17:42:49.086637,/home/fet/stimuli/test_categories_box5/nonreward/Ag_Stim_7_LblRed0613_110129022830.wav,Unrewarded,False,False,nan,False,6.0
