@@ -744,7 +744,6 @@ PCC_group_DFA_CI = zeros(ngroups, 2);
 PCC_group_RFP_CI = zeros(ngroups, 2);
 for i = 1:ngroups
     [PCC_group_DFA(i), PCC_group_DFA_CI(i,:)] = binofit(ConfMat_DFA(i,i), sum(ConfMat_DFA(i, :), 2));
-    [PCC_group_RF(i), PCC_group_RF_CI(i,:)] = binofit(ConfMat_RF(i,i), sum(ConfMat_RF(i, :), 2));
     [PCC_group_RFP(i), PCC_group_RFP_CI(i,:)] = binofit(ConfMat_RFP(i,i), sum(ConfMat_RFP(i, :), 2));
 end
 
@@ -774,13 +773,13 @@ PCC_info_perbird.PCC_group_RFP_CI = PCC_group_RFP_CI;
 figure(9);
 n_validGroupDFA = zeros(1,ngroups);
 confMatProb_DFA = zeros(ngroups);
-n_validGroupRF = zeros(1,ngroups);
-confMatProb_RF = zeros(ngroups);
+n_validGroupRFP = zeros(1,ngroups);
+confMatProb_RFP = zeros(ngroups);
 for i=1:ngroups
     n_validGroupDFA(i) = sum(ConfMat_DFA(i,:));
     confMatProb_DFA(i,:) = ConfMat_DFA(i,:)/n_validGroupDFA(i);
-    n_validGroupRF(i) = sum(ConfMat_RF(i,:));
-    confMatProb_RF(i,:) = ConfMat_RF(i,:)/n_validGroupRF(i);
+    n_validGroupRFP(i) = sum(ConfMat_RFP(i,:));
+    confMatProb_RFP(i,:) = ConfMat_RFP(i,:)/n_validGroupRFP(i);
 end
 
     
@@ -797,7 +796,7 @@ set(gca(), 'Xtick', 1:ngroups);
 set(gca(), 'XTickLabel', name_grp);
     
 subplot(1,2,2);
-imagesc(confMatProb_RF);
+imagesc(confMatProb_RFP);
 xlabel('Guess');
 ylabel('Actual');
 colormap(gray);

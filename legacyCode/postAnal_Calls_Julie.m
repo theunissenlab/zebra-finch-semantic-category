@@ -380,8 +380,10 @@ PCC_Acoust = struct( 'nvalid', 0, ...
     'Total_RFP_CI', zeros(1,2),  'group_RFP_CI', zeros(ngroups, 2), ...
     'Conf_RFP', zeros(ngroups, ngroups) );
 
-% Allocate space for distance vector and confusion matrix
+% Allocate space for distance vector and total confusion matrices
 Dist = zeros(1, ngroups);
+ConfMat_DFA = zeros(ngroups, ngroups);
+ConfMat_RFP = zeros(ngroups, ngroups);
 n_validTot = 0;
 
 for iperm=1:nPerm
@@ -400,7 +402,7 @@ for iperm=1:nPerm
     
     % ind_valid = find(strcmp(birdNameCuts, birdNames{ibird}));    % index of the validation calls
     n_valid = length(ind_valid);
-        fprintf(1, 'Starting Permutation %d with %d in validation\n', iperm, n_valid);
+    fprintf(1, 'Starting Permutation %d with %d in validation\n', iperm, n_valid);
     
     % Separate data into fitting and validation
     X_valid = Acoust(ind_valid, :);
@@ -450,6 +452,8 @@ for iperm=1:nPerm
         
         PCC_Acoust.Conf_DFA(k_actual_all, k_guess_all) = PCC_Acoust.Conf_DFA(k_actual_all, k_guess_all) + 1;
     end
+    ConfMat_DFA = ConfMat_DFA + squeeze(PCC_Acoust_perbird.Conf_DFA(ibird, :, :));
+
     % Repeat using a random forest classifier with and without equal
     % prior
         fprintf(1, '\t Starting RF\n');
@@ -461,6 +465,7 @@ for iperm=1:nPerm
         k_guess = find(strcmp(name_grp,Group_predict_prior(i)));
         PCC_Acoust.Conf_RFP(k_actual, k_guess) = PCC_Acoust.Conf_RFP(k_actual, k_guess) + 1;
     end
+    
     
      n_validTot = n_validTot + n_valid;
     
@@ -475,10 +480,180 @@ for i = 1:ngroups
 end
 PCC_Acoust.nvalid = n_validTot;
 
-save('/Users/frederictheunissen/Documents/Data/Julie/Acoustical Analysis/vocTypeAcoust.mat', 'PCC_Acoust');
+save('/Users/frederictheunissen/Google Drive/My Drive/Data/Julie/Acoustical Analysis/vocTypeAcoust.mat', 'PCC_Acoust');
+
+%% New Code in 2024 - to run DFA and RF per bird.
+
+birdNames = unique(birdNameCuts);
+nbirds = length(birdNames);
+
+PCC_Acoust_perbird = struct('nvalid', zeros(nbirds,1), ...
+    'PCC_Total_DFA', 0,  'PCC_group_DFA', zeros(ngroups,1) , ...
+    'PCC_Total_DFA_CI', zeros(2,1),  'PCC_group_DFA_CI', zeros(ngroups, 2) , ...
+    'Conf_DFA', zeros(nbirds, ngroups, ngroups), ...
+    'PCC_Total_RFP', 0, 'PCC_group_RFP', zeros(ngroups,1), ...
+    'PCC_Total_RFP_CI', zeros(2,1), 'PCC_group_RFP_CI', zeros(ngroups, 2), ...
+    'Conf_RFP', zeros(nbirds, ngroups, ngroups));
+
+% Allocate space for distance vector and confusion matrix
+
+Dist = zeros(1, ngroups); 
+ConfMat_DFA = zeros(ngroups, ngroups);
+ConfMat_RFP = zeros(ngroups, ngroups);
+n_validTot = 0;
+
+for ibird=1:nbirds
+    
+        
+    % Choose a random bird from each group for validation
+    ind_valid = find(strcmp(birdNameCuts, birdNames{ibird}));
+    n_valid = length(ind_valid);
+    PCC_Acoust_perbird.nvalid(ibird) = n_valid;
+    fprintf(1, '%d: %s n for validation = %d\n', ibird, birdNames{ibird}, n_valid);
+        
+    % Separate data into fitting and validation
+    X_valid = Acoust(ind_valid, :);
+    X_fit = Acoust;
+    X_fit(ind_valid, :) = [];
+        
+    % Similarly for the group labels.
+    Group_valid = vocTypeCuts(ind_valid);
+    Group_fit = vocTypeCuts;
+    Group_fit(ind_valid) = [];
+
+    % Perform the linear DFA using manova1 for the training set
+    fprintf(1, '\t Starting DFA\n');
+    [nDF, p, stats] = manova1(X_fit, Group_fit);
+    [mean_bgrp, sem_bgrp, meanbCI_grp, range_bgrp, name_bgrp] = grpstats(stats.canon(:,1:nDF),Group_fit', {'mean', 'sem', 'meanci', 'range', 'gname'});
+    nbgroups = size(mean_bgrp,1);
+    
+    % Project the validation data set into the DFA.
+    mean_X_fit = nanmean(X_fit);
+    Xc = X_valid - repmat(mean_X_fit, size(X_valid,1), 1);
+    Canon = Xc*stats.eigenvec(:, 1:nDF);
+    
+    % Use Euclidian Distances
+    for i = 1:n_valid
+        for j = 1:nbgroups
+            Dist(j) = sqrt((Canon(i,:) - mean_bgrp(j,:))*(Canon(i,:) - mean_bgrp(j,:))');
+            if strcmp(name_bgrp(j),Group_valid(i))
+                k_actual = j;
+            end
+        end
+        k_guess = find(Dist == nanmin(Dist), 1, 'first');
+        
+        % Just in case a group is missing find the index that corresponds
+        % to the groups when all the data is taken into account.
+        for j=1:ngroups
+            if strcmp(name_grp(j), name_bgrp(k_actual))
+                k_actual_all = j;
+                break;
+            end
+        end
+        for j=1:ngroups
+            if strcmp(name_grp(j), name_bgrp(k_guess))
+                k_guess_all = j;
+                break;
+            end
+        end
+        
+        PCC_Acoust_perbird.Conf_DFA(ibird, k_actual_all, k_guess_all) = PCC_Acoust_perbird.Conf_DFA(ibird, k_actual_all, k_guess_all) + 1;
+    end
+    ConfMat_DFA = ConfMat_DFA + squeeze(PCC_Acoust_perbird.Conf_DFA(ibird, :, :));
+
+    fprintf(1, '\t Starting RF\n');
+    BPrior = TreeBagger(200, X_fit, Group_fit, 'FBoot', 1.0, 'OOBPred', 'on', 'MinLeaf', 5, 'NPrint', 500, 'Prior', ones(1,ngroups).*(1/ngroups));
+    Group_predict_prior = predict(BPrior, X_valid);
+    
+    for i = 1:n_valid
+        k_actual = find(strcmp(name_grp,Group_valid(i)));
+        k_guess = find(strcmp(name_grp,Group_predict_prior(i)));
+        PCC_Acoust_perbird.Conf_RFP(ibird, k_actual, k_guess) = PCC_Acoust_perbird.Conf_RFP(ibird, k_actual, k_guess) + 1;
+    end
+    ConfMat_RFP = ConfMat_RFP + squeeze(PCC_Acoust_perbird.Conf_RFP(ibird, :, :));
+        
+    n_validTot = n_validTot + n_valid;
+
+end
+
+[PCC_Total_DFA, PCC_Total_DFA_CI]= binofit(sum(diag(ConfMat_DFA)), n_validTot);
+[PCC_Total_RFP, PCC_Total_RFP_CI]= binofit(sum(diag(ConfMat_RFP)), n_validTot);
+    
+PCC_group_DFA = zeros(ngroups, 1);
+PCC_group_RFP = zeros(ngroups, 1);
+PCC_group_DFA_CI = zeros(ngroups, 2);
+PCC_group_RFP_CI = zeros(ngroups, 2);
+for i = 1:ngroups
+    [PCC_group_DFA(i), PCC_group_DFA_CI(i,:)] = binofit(ConfMat_DFA(i,i), sum(ConfMat_DFA(i, :), 2));
+    [PCC_group_RFP(i), PCC_group_RFP_CI(i,:)] = binofit(ConfMat_RFP(i,i), sum(ConfMat_RFP(i, :), 2));
+end
+
+fprintf(1,'\n');
+fprintf(1, 'Final Results : DFA (%.2f-%.2f) RFP (%.2f-%.2f)\n', PCC_Total_DFA_CI(1)*100, PCC_Total_DFA_CI(2)*100, PCC_Total_RFP_CI(1)*100, PCC_Total_RFP_CI(2)*100);
+fprintf(1, '\t\t DFA Group Min %.2f RFP Group Min %.2f\n', min(PCC_group_DFA)*100, min(PCC_group_RFP)*100);
+fprintf(1, '\t\t DFA Group Max %.2f RFP Group Max %.2f\n', max(PCC_group_DFA)*100, max(PCC_group_RFP)*100);
+    
+int_DFA = PCC_group_DFA_CI(:,2) - PCC_group_DFA_CI(:,1);
+int_RFP = PCC_group_RFP_CI(:,2) - PCC_group_RFP_CI(:,1);
+fprintf(1, '\t\t DFA Err max %.2f RFP Err max %.2f\n', max(int_DFA)*100, max(int_RFP)*100);
+    
+% Store the information
+    
+PCC_Acoust_perbird.PCC_Total_DFA = PCC_Total_DFA; 
+PCC_Acoust_perbird.PCC_Total_DFA_CI = PCC_Total_DFA_CI;
+PCC_Acoust_perbird.PCC_group_DFA = PCC_group_DFA; 
+PCC_Acoust_perbird.PCC_group_DFA_CI = PCC_group_DFA_CI;
+PCC_Acoust_perbird.PCC_Total_RFP = PCC_Total_RFP; 
+PCC_Acoust_perbird.PCC_Total_RFP_CI = PCC_Total_RFP_CI;
+PCC_Acoust_perbird.PCC_group_RFP = PCC_group_RFP;
+PCC_Acoust_perbird.PCC_group_RFP_CI = PCC_group_RFP_CI;
+    
+
+% Display confusion Matrix
+figure();
+n_validGroupDFA = zeros(1,ngroups);
+confMatProb_DFA = zeros(ngroups);
+n_validGroupRFP = zeros(1,ngroups);
+confMatProb_RFP = zeros(ngroups);
+for i=1:ngroups
+    n_validGroupDFA(i) = sum(ConfMat_DFA(i,:));
+    confMatProb_DFA(i,:) = ConfMat_DFA(i,:)/n_validGroupDFA(i);
+    n_validGroupRFP(i) = sum(ConfMat_RFP(i,:));
+    confMatProb_RFP(i,:) = ConfMat_RFP(i,:)/n_validGroupRFP(i);
+end
+
+    
+subplot(1,2,1);
+imagesc(confMatProb_DFA);
+xlabel('Guess');
+ylabel('Actual');
+colormap(gray);
+colorbar;
+title(sprintf('Confusion Matrix DFA %.1f%%(%.1f%%) Correct', 100*PCC_Total_DFA, 100*mean(PCC_group_DFA)));
+set(gca(), 'Ytick', 1:ngroups);
+set(gca(), 'YTickLabel', name_grp);
+set(gca(), 'Xtick', 1:ngroups);
+set(gca(), 'XTickLabel', name_grp);
+    
+subplot(1,2,2);
+imagesc(confMatProb_RFP);
+xlabel('Guess');
+ylabel('Actual');
+colormap(gray);
+colorbar;
+title(sprintf('Confusion Matrix RF %.1f%%(%.1f%%) Correct', 100*PCC_Total_RFP, 100*mean(PCC_group_RFP)));
+set(gca(), 'Ytick', 1:ngroups);
+set(gca(), 'YTickLabel', name_grp);
+set(gca(), 'Xtick', 1:ngroups);
+set(gca(), 'XTickLabel', name_grp);
+    
+% save the DFA and RF for PAFs
+save vocTypePAFBird.mat PCC_Acoust_perbird ngroups name_grp nbirds birdNames
+
+
 
 %% Print out the confusion Matrix
-load '/Users/frederictheunissen/Google Drive/My Drive/Data/Julie/FullVocalizationBank/vocTypeAcoust.mat';
+load '/Users/frederictheunissen/Google Drive/My Drive/Data/Julie/Acoustical Analysis/vocTypeAcoust.mat';
 figure();
 
 
@@ -506,8 +681,6 @@ ylabel('Actual');
 axis square;
 colormap(gray);
 colorbar;
-%title(sprintf('Spectro Confusion Matrix DFA\nPCA = %d PC Total= %.1f%% PCC Mean = %.1f%%', ...
-%    PCC_info_bird.nb(inb), 100*PCC_info_bird.PCC_Total_DFA(inb), 100*mean(PCC_info_bird.PCC_group_DFA(inb,:))));
 
 title(sprintf('RF (Equal Prior) Total = %.1f%% Type = %.1f%%', 100*PCC_Acoust.Total_RFP, 100*mean(PCC_Acoust.group_RFP)));
 set(gca(), 'Ytick', 1:ngroups);
@@ -539,8 +712,6 @@ ylabel('Actual');
 axis square;
 colormap(gray);
 colorbar;
-%title(sprintf('Spectro Confusion Matrix DFA\nPCA = %d PC Total= %.1f%% PCC Mean = %.1f%%', ...
-%    PCC_info_bird.nb(inb), 100*PCC_info_bird.PCC_Total_DFA(inb), 100*mean(PCC_info_bird.PCC_group_DFA(inb,:))));
 
 title(sprintf('DFA Total = %.1f%% Type = %.1f%%', 100*PCC_Acoust.Total_DFA, 100*mean(PCC_Acoust.group_DFA)));
 set(gca(), 'Ytick', 1:ngroups);
@@ -647,8 +818,8 @@ for iDF=2:nDF
         end
         
         plot(mean_groups(ig_ind,1), mean_groups(ig_ind,iDF), 's', 'MarkerSize', 10, ...
-                'color', colorVals{ig}./255,'MarkerEdgeColor','k',...
-                'MarkerFaceColor',colorVals{ig}./255);
+                'color', colorVals(ig,:)./255,'MarkerEdgeColor','k',...
+                'MarkerFaceColor',colorVals(ig,:)./255);
         hold on;
     end
     xlabel('DF1');
