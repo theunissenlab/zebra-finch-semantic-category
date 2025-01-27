@@ -5,8 +5,8 @@ import pandas as pd
 import glob
 
 
-#PROJDIR = '/Users/frederictheunissen/Code/zebra-finch-categories/'
-PROJDIR = '/auto/zdrive/aude/Code/zebra-finch-semantic-category/'
+PROJDIR = '/Users/frederictheunissen/Code/zebra-finch-categories/'
+# PROJDIR = '/auto/zdrive/aude/Code/zebra-finch-semantic-category/'
 DATADIR = os.path.join(PROJDIR, "data/confusion/")
 
                             
