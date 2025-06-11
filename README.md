@@ -11,7 +11,7 @@ data/
   behavior/
     TrialData.csv     # for each bird and date for Task 1
   confusion/
-    TrialData.csv    # for each bird and each test based on stimuli
+    TrialData.csv    # for each bird and each test based on stimuli in Task 2
   acoustic/
     vocParamTable.h5       # The predefined acoustic features (PAFs) obtained with BioSound (soundsig)
     vocTypeSpectroData.mat # The spectrogram features
