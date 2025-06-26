@@ -1756,10 +1756,12 @@ display: none;
 library</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsbWU0KVxuXG5gYGAifQ== -->
-<pre class="r"><code>library(lme4)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsbWU0KVxuYGBgIn0= -->
+<pre class="r"><code>library(lme4)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBNYXRyaXhcbiJ9 -->
+<pre><code>Loading required package: Matrix</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Read the data</p>
@@ -1776,59 +1778,181 @@ post_counts$Re &lt;- factor(post_counts$Re)
 
 summary(post_counts)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgIFggICAgICAgICAgIFN1YmplY3QgICAgICAgICBcbiBNaW4uICAgOiAwLjAwICAgTGVuZ3RoOjcwICAgICAgICAgXG4gMXN0IFF1LjoxNy4yNSAgIENsYXNzIDpjaGFyYWN0ZXIgIFxuIE1lZGlhbiA6MzQuNTAgICBNb2RlICA6Y2hhcmFjdGVyICBcbiBNZWFuICAgOjM0LjUwICAgICAgICAgICAgICAgICAgICAgXG4gM3JkIFF1Ljo1MS43NSAgICAgICAgICAgICAgICAgICAgIFxuIE1heC4gICA6NjkuMDAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgdGVzdCAgICAgICAgICAgdHJhaW5lZF9yZXdhcmRcbiBMZW5ndGg6NzAgICAgICAgICAgREM6MjAgICAgICAgICBcbiBDbGFzcyA6Y2hhcmFjdGVyICAgVEU6NDAgICAgICAgICBcbiBNb2RlICA6Y2hhcmFjdGVyICAgVEg6MTAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgIENvbmRpdGlvbiAgICAgICBJbnQgICAgICAgIFxuIENvbmZ1c2luZyAgICA6MTQgICBNaW4uICAgOiAgIDAuMCAgXG4gTGVhcm5pbmcgICAgIDoxNCAgIDFzdCBRdS46ICAxMC4wICBcbiBuZXdfY29uZ3J1YW50OjE0ICAgTWVkaWFuIDogIDYzLjAgIFxuIE5vcm1hbCAgICAgICA6MTQgICBNZWFuICAgOiAxNjEuMyAgXG4gb2xkX2NvbmdydWFudDoxNCAgIDNyZCBRdS46IDE5NS41ICBcbiAgICAgICAgICAgICAgICAgICAgTWF4LiAgIDoxMjM3LjAgIFxuICAgICBOb0ludCAgICAgICAgUmUgICAgXG4gTWluLiAgIDogIDUuMDAgICBOOjM1ICBcbiAxc3QgUXUuOiAzNy41MCAgIFk6MzUgIFxuIE1lZGlhbiA6IDY2LjAwICAgICAgICAgXG4gTWVhbiAgIDogODguMDEgICAgICAgICBcbiAzcmQgUXUuOjExNS4yNSAgICAgICAgIFxuIE1heC4gICA6MzEyLjAwICAgICAgICAgXG4ifQ== -->
+<pre><code>       X           Subject         
+ Min.   : 0.00   Length:70         
+ 1st Qu.:17.25   Class :character  
+ Median :34.50   Mode  :character  
+ Mean   :34.50                     
+ 3rd Qu.:51.75                     
+ Max.   :69.00                     
+     test           trained_reward
+ Length:70          DC:20         
+ Class :character   TE:40         
+ Mode  :character   TH:10         
+                                  
+                                  
+                                  
+         Condition       Int        
+ Confusing    :14   Min.   :   0.0  
+ Learning     :14   1st Qu.:  10.0  
+ new_congruant:14   Median :  63.0  
+ Normal       :14   Mean   : 161.3  
+ old_congruant:14   3rd Qu.: 195.5  
+                    Max.   :1237.0  
+     NoInt        Re    
+ Min.   :  5.00   N:35  
+ 1st Qu.: 37.50   Y:35  
+ Median : 66.00         
+ Mean   : 88.01         
+ 3rd Qu.:115.25         
+ Max.   :312.00         </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Fit the models for learning period</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCggMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0xlYXJuaW5nJylcbmJhc2VfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0xlYXJuaW5nJylcblxuYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbClcblxuIyBMb29rIGF0IGVmZmVjdCBzaXplXG5wcmludChzcHJpbnRmKCdMb2cyKE9SKSA9ICUuMmYgWyUuMmYsICUuMmZdICg5NSUlKScsIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpLFxuICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpIC0gMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpLCBcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSArIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKVxuICAgICAgICAgICAgICApKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCggMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0xlYXJuaW5nJylcbmJhc2VfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0xlYXJuaW5nJylcblxuYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbClcbmBgYCJ9 -->
 <pre class="r"><code>null_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ 1 + (( 1 + Re) |Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;Learning&#39;)
 base_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;Learning&#39;)
 
-anova(null_model, base_model)
-
-# Look at effect size
-print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
+anova(null_model, base_model)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogcG9zdF9jb3VudHNcblN1YnNldDogcG9zdF9jb3VudHMkQ29uZGl0aW9uID09IFwiTGVhcm5pbmdcIlxuTW9kZWxzOlxubnVsbF9tb2RlbDogY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCgxICsgUmUpIHwgU3ViamVjdClcbmJhc2VfbW9kZWw6IGNiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSkgfCBTdWJqZWN0KVxuICAgICAgICAgICBucGFyICAgIEFJQyAgICBCSUMgIGxvZ0xpayBkZXZpYW5jZSBDaGlzcSBEZlxubnVsbF9tb2RlbCAgICA0IDE0Mi43MiAxNDUuMjggLTY3LjM2MCAgIDEzNC43MiAgICAgICAgIFxuYmFzZV9tb2RlbCAgICA1IDEyMi43NSAxMjUuOTQgLTU2LjM3NSAgIDExMi43NSAyMS45NyAgMVxuICAgICAgICAgICBQcig+Q2hpc3EpICAgIFxubnVsbF9tb2RlbCAgICAgICAgICAgICAgIFxuYmFzZV9tb2RlbCAgMi43NjllLTA2ICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4ifQ== -->
+<pre><code>Data: post_counts
+Subset: post_counts$Condition == &quot;Learning&quot;
+Models:
+null_model: cbind(Int, NoInt) ~ 1 + ((1 + Re) | Subject)
+base_model: cbind(Int, NoInt) ~ Re + ((1 + Re) | Subject)
+           npar    AIC    BIC  logLik deviance Chisq Df
+null_model    4 142.72 145.28 -67.360   134.72         
+base_model    5 122.75 125.94 -56.375   112.75 21.97  1
+           Pr(&gt;Chisq)    
+null_model               
+base_model  2.769e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb29rIGF0IGVmZmVjdCBzaXplXG5sZWFybmluZ0RGID0gcG9zdF9jb3VudHNbcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdMZWFybmluZycsIF1cbnByaW50KHNwcmludGYoJ051bWJlciBvZiB0cmlhbHM6ICVkJywgc3VtKGxlYXJuaW5nREYkSW50KStzdW0obGVhcm5pbmdERiROb0ludCkpKVxuYGBgIn0= -->
+<pre class="r"><code># Look at effect size
+learningDF = post_counts[post_counts$Condition == &#39;Learning&#39;, ]
+print(sprintf(&#39;Number of trials: %d&#39;, sum(learningDF$Int)+sum(learningDF$NoInt)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTnVtYmVyIG9mIHRyaWFsczogNDgyMlwiXG4ifQ== -->
+<pre><code>[1] &quot;Number of trials: 4822&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
               ))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTG9nMihPUikgPSA1LjYxIFs0LjgyLCA2LjQwXSAoOTUlKVwiXG4ifQ== -->
+<pre><code>[1] &quot;Log2(OR) = 5.61 [4.82, 6.40] (95%)&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Fit models for new vocalizers in congruant day</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ25ld19jb25ncnVhbnQnKVxuYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnbmV3X2NvbmdydWFudCcpXG5cbmFub3ZhKG51bGxfbW9kZWwsIGJhc2VfbW9kZWwpXG5cbiMgTG9vayBhdCBlZmZlY3Qgc2l6ZVxucHJpbnQoJ05ldyB2b2NhbGl6ZXJzIG9uIGNvbmdydWFudCBkYXknKVxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ25ld19jb25ncnVhbnQnKVxuYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnbmV3X2NvbmdydWFudCcpXG5cbmFub3ZhKG51bGxfbW9kZWwsIGJhc2VfbW9kZWwpXG5gYGAifQ== -->
 <pre class="r"><code>null_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;new_congruant&#39;)
 base_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;new_congruant&#39;)
 
-anova(null_model, base_model)
-
-# Look at effect size
-print(&#39;New vocalizers on congruant day&#39;)
-print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
+anova(null_model, base_model)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogcG9zdF9jb3VudHNcblN1YnNldDogcG9zdF9jb3VudHMkQ29uZGl0aW9uID09IFwibmV3X2NvbmdydWFudFwiXG5Nb2RlbHM6XG5udWxsX21vZGVsOiBjYmluZChJbnQsIE5vSW50KSB+IDEgKyAoKDEgKyBSZSkgfCBTdWJqZWN0KVxuYmFzZV9tb2RlbDogY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKSB8IFN1YmplY3QpXG4gICAgICAgICAgIG5wYXIgICAgQUlDICAgIEJJQyAgbG9nTGlrIGRldmlhbmNlICBDaGlzcSBEZiBQcig+Q2hpc3EpXG5udWxsX21vZGVsICAgIDQgMTMzLjkyIDEzNi40OCAtNjIuOTYwICAgMTI1LjkyICAgICAgICAgICAgICAgICAgICAgXG5iYXNlX21vZGVsICAgIDUgMTE3LjUxIDEyMC43MCAtNTMuNzUzICAgMTA3LjUxIDE4LjQxMyAgMSAgMS43NzhlLTA1XG4gICAgICAgICAgICAgIFxubnVsbF9tb2RlbCAgICBcbmJhc2VfbW9kZWwgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
+<pre><code>Data: post_counts
+Subset: post_counts$Condition == &quot;new_congruant&quot;
+Models:
+null_model: cbind(Int, NoInt) ~ 1 + ((1 + Re) | Subject)
+base_model: cbind(Int, NoInt) ~ Re + ((1 + Re) | Subject)
+           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+null_model    4 133.92 136.48 -62.960   125.92                     
+base_model    5 117.51 120.70 -53.753   107.51 18.413  1  1.778e-05
+              
+null_model    
+base_model ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb29rIGF0IGVmZmVjdCBzaXplXG5wcmludCgnTmV3IHZvY2FsaXplcnMgb24gY29uZ3J1YW50IGRheScpXG5gYGAifQ== -->
+<pre class="r"><code># Look at effect size
+print(&#39;New vocalizers on congruant day&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTmV3IHZvY2FsaXplcnMgb24gY29uZ3J1YW50IGRheVwiXG4ifQ== -->
+<pre><code>[1] &quot;New vocalizers on congruant day&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmV3Q29uZ3J1YW50REYgPSBwb3N0X2NvdW50c1twb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ25ld19jb25ncnVhbnQnLCBdXG5wcmludChzcHJpbnRmKCdOdW1iZXIgb2YgdHJpYWxzOiAlZCcsIHN1bShuZXdDb25ncnVhbnRERiRJbnQpK3N1bShuZXdDb25ncnVhbnRERiROb0ludCkpKVxuYGBgIn0= -->
+<pre class="r"><code>newCongruantDF = post_counts[post_counts$Condition == &#39;new_congruant&#39;, ]
+print(sprintf(&#39;Number of trials: %d&#39;, sum(newCongruantDF$Int)+sum(newCongruantDF$NoInt)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTnVtYmVyIG9mIHRyaWFsczogMjMwOFwiXG4ifQ== -->
+<pre><code>[1] &quot;Number of trials: 2308&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
               ))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTG9nMihPUikgPSA0Ljg2IFszLjgxLCA1LjkyXSAoOTUlKVwiXG4ifQ== -->
+<pre><code>[1] &quot;Log2(OR) = 4.86 [3.81, 5.92] (95%)&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Old vocalizers on congruant day</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ29sZF9jb25ncnVhbnQnKVxuYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnb2xkX2NvbmdydWFudCcpXG5cbmFub3ZhKG51bGxfbW9kZWwsIGJhc2VfbW9kZWwpXG5cbiMgTG9vayBhdCBlZmZlY3Qgc2l6ZVxucHJpbnQoJ09sZCB2b2NhbGl6ZXJzIG9uIGNvbmdydWFudCBkYXknKVxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ29sZF9jb25ncnVhbnQnKVxuYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnb2xkX2NvbmdydWFudCcpXG5gYGAifQ== -->
 <pre class="r"><code>null_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;old_congruant&#39;)
-base_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;old_congruant&#39;)
-
-anova(null_model, base_model)
-
-# Look at effect size
-print(&#39;Old vocalizers on congruant day&#39;)
-print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
+base_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;old_congruant&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYm91bmRhcnkgKHNpbmd1bGFyKSBmaXQ6IHNlZSBoZWxwKCdpc1Npbmd1bGFyJylcbiJ9 -->
+<pre><code>boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbClcbmBgYCJ9 -->
+<pre class="r"><code>anova(null_model, base_model)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogcG9zdF9jb3VudHNcblN1YnNldDogcG9zdF9jb3VudHMkQ29uZGl0aW9uID09IFwib2xkX2NvbmdydWFudFwiXG5Nb2RlbHM6XG5udWxsX21vZGVsOiBjYmluZChJbnQsIE5vSW50KSB+IDEgKyAoKDEgKyBSZSkgfCBTdWJqZWN0KVxuYmFzZV9tb2RlbDogY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKSB8IFN1YmplY3QpXG4gICAgICAgICAgIG5wYXIgICAgQUlDICAgIEJJQyAgbG9nTGlrIGRldmlhbmNlICBDaGlzcSBEZiBQcig+Q2hpc3EpXG5udWxsX21vZGVsICAgIDQgMTMwLjI0IDEzMi44MCAtNjEuMTIyICAgMTIyLjI0ICAgICAgICAgICAgICAgICAgICAgXG5iYXNlX21vZGVsICAgIDUgMTExLjU0IDExNC43MyAtNTAuNzcwICAgMTAxLjU0IDIwLjcwNCAgMSAgNS4zNjFlLTA2XG4gICAgICAgICAgICAgIFxubnVsbF9tb2RlbCAgICBcbmJhc2VfbW9kZWwgKioqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcbiJ9 -->
+<pre><code>Data: post_counts
+Subset: post_counts$Condition == &quot;old_congruant&quot;
+Models:
+null_model: cbind(Int, NoInt) ~ 1 + ((1 + Re) | Subject)
+base_model: cbind(Int, NoInt) ~ Re + ((1 + Re) | Subject)
+           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+null_model    4 130.24 132.80 -61.122   122.24                     
+base_model    5 111.54 114.73 -50.770   101.54 20.704  1  5.361e-06
+              
+null_model    
+base_model ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb29rIGF0IGVmZmVjdCBzaXplXG5wcmludCgnT2xkIHZvY2FsaXplcnMgb24gY29uZ3J1YW50IGRheScpXG5gYGAifQ== -->
+<pre class="r"><code># Look at effect size
+print(&#39;Old vocalizers on congruant day&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiT2xkIHZvY2FsaXplcnMgb24gY29uZ3J1YW50IGRheVwiXG4ifQ== -->
+<pre><code>[1] &quot;Old vocalizers on congruant day&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub2xkQ29uZ3J1YW50REYgPSBwb3N0X2NvdW50c1twb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ29sZF9jb25ncnVhbnQnLCBdXG5wcmludChzcHJpbnRmKCdOdW1iZXIgb2YgdHJpYWxzOiAlZCcsIHN1bShvbGRDb25ncnVhbnRERiRJbnQpK3N1bShvbGRDb25ncnVhbnRERiROb0ludCkpKVxuYGBgIn0= -->
+<pre class="r"><code>oldCongruantDF = post_counts[post_counts$Condition == &#39;old_congruant&#39;, ]
+print(sprintf(&#39;Number of trials: %d&#39;, sum(oldCongruantDF$Int)+sum(oldCongruantDF$NoInt)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTnVtYmVyIG9mIHRyaWFsczogMjI5M1wiXG4ifQ== -->
+<pre><code>[1] &quot;Number of trials: 2293&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
               ))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTG9nMihPUikgPSA1LjM0IFs0LjQwLCA2LjI4XSAoOTUlKVwiXG4ifQ== -->
+<pre><code>[1] &quot;Log2(OR) = 5.34 [4.40, 6.28] (95%)&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Is there a difference between old and new?</p>
@@ -1845,37 +1969,99 @@ anova(condition_model, base_model)</code></pre>
 <p>New confusing</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycpXG5iYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdDb25mdXNpbmcnKVxuXG5hbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKVxuXG4jIExvb2sgYXQgZWZmZWN0IHNpemVcbnByaW50KCdOZXcgdm9jYWxpemVycyBvbiBjb25mdXNpbmcgZGF5JylcbnByaW50KHNwcmludGYoJ0xvZzIoT1IpID0gJS4yZiBbJS4yZiwgJS4yZl0gKDk1JSUpJywgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSksXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgLSAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSksIFxuICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpICsgMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpXG4gICAgICAgICAgICAgICkpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycpXG5iYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdDb25mdXNpbmcnKVxuXG5hbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKVxuYGBgIn0= -->
 <pre class="r"><code>null_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;Confusing&#39;)
 base_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;Confusing&#39;)
 
-anova(null_model, base_model)
-
-# Look at effect size
-print(&#39;New vocalizers on confusing day&#39;)
-print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
+anova(null_model, base_model)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogcG9zdF9jb3VudHNcblN1YnNldDogcG9zdF9jb3VudHMkQ29uZGl0aW9uID09IFwiQ29uZnVzaW5nXCJcbk1vZGVsczpcbm51bGxfbW9kZWw6IGNiaW5kKEludCwgTm9JbnQpIH4gMSArICgoMSArIFJlKSB8IFN1YmplY3QpXG5iYXNlX21vZGVsOiBjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpIHwgU3ViamVjdClcbiAgICAgICAgICAgbnBhciAgICBBSUMgICAgQklDICBsb2dMaWsgZGV2aWFuY2UgIENoaXNxIERmIFByKD5DaGlzcSlcbm51bGxfbW9kZWwgICAgNCAxNDQuNzEgMTQ3LjI2IC02OC4zNTQgICAxMzYuNzEgICAgICAgICAgICAgICAgICAgICBcbmJhc2VfbW9kZWwgICAgNSAxMzcuODkgMTQxLjA5IC02My45NDUgICAxMjcuODkgOC44MTc2ICAxICAgMC4wMDI5ODNcbiAgICAgICAgICAgICBcbm51bGxfbW9kZWwgICBcbmJhc2VfbW9kZWwgKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuIn0= -->
+<pre><code>Data: post_counts
+Subset: post_counts$Condition == &quot;Confusing&quot;
+Models:
+null_model: cbind(Int, NoInt) ~ 1 + ((1 + Re) | Subject)
+base_model: cbind(Int, NoInt) ~ Re + ((1 + Re) | Subject)
+           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+null_model    4 144.71 147.26 -68.354   136.71                     
+base_model    5 137.89 141.09 -63.945   127.89 8.8176  1   0.002983
+             
+null_model   
+base_model **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb29rIGF0IGVmZmVjdCBzaXplXG5wcmludCgnTmV3IHZvY2FsaXplcnMgb24gY29uZnVzaW5nIGRheScpXG5gYGAifQ== -->
+<pre class="r"><code># Look at effect size
+print(&#39;New vocalizers on confusing day&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTmV3IHZvY2FsaXplcnMgb24gY29uZnVzaW5nIGRheVwiXG4ifQ== -->
+<pre><code>[1] &quot;New vocalizers on confusing day&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmV3Q29uZnVzaW5nREYgPSBwb3N0X2NvdW50c1twb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycsIF1cbnByaW50KHNwcmludGYoJ051bWJlciBvZiB0cmlhbHM6ICVkJywgc3VtKG5ld0NvbmZ1c2luZ0RGJEludCkrc3VtKG5ld0NvbmZ1c2luZ0RGJE5vSW50KSkpXG5gYGAifQ== -->
+<pre class="r"><code>newConfusingDF = post_counts[post_counts$Condition == &#39;Confusing&#39;, ]
+print(sprintf(&#39;Number of trials: %d&#39;, sum(newConfusingDF$Int)+sum(newConfusingDF$NoInt)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTnVtYmVyIG9mIHRyaWFsczogNDAyMFwiXG4ifQ== -->
+<pre><code>[1] &quot;Number of trials: 4020&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
               ))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTG9nMihPUikgPSAtMi4xNyBbLTMuMjEsIC0xLjEyXSAoOTUlKVwiXG4ifQ== -->
+<pre><code>[1] &quot;Log2(OR) = -2.17 [-3.21, -1.12] (95%)&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Old Confusing</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ05vcm1hbCcpXG5iYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdOb3JtYWwnKVxuXG5hbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKVxuXG4jIExvb2sgYXQgZWZmZWN0IHNpemVcbnByaW50KCdPbGQgdm9jYWxpemVycyBvbiBjb25mdXNpbmcgZGF5JylcbnByaW50KHNwcmludGYoJ0xvZzIoT1IpID0gJS4yZiBbJS4yZiwgJS4yZl0gKDk1JSUpJywgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSksXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgLSAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSksIFxuICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpICsgMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpXG4gICAgICAgICAgICAgICkpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ05vcm1hbCcpXG5iYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdOb3JtYWwnKVxuXG5hbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKVxuYGBgIn0= -->
 <pre class="r"><code>null_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ 1 + ( (1 + Re) |Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;Normal&#39;)
 base_model &lt;- glmer(&#39;cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)&#39;, data = post_counts, family = binomial, subset = post_counts$Condition == &#39;Normal&#39;)
 
-anova(null_model, base_model)
-
-# Look at effect size
-print(&#39;Old vocalizers on confusing day&#39;)
-print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
+anova(null_model, base_model)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRGF0YTogcG9zdF9jb3VudHNcblN1YnNldDogcG9zdF9jb3VudHMkQ29uZGl0aW9uID09IFwiTm9ybWFsXCJcbk1vZGVsczpcbm51bGxfbW9kZWw6IGNiaW5kKEludCwgTm9JbnQpIH4gMSArICgoMSArIFJlKSB8IFN1YmplY3QpXG5iYXNlX21vZGVsOiBjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpIHwgU3ViamVjdClcbiAgICAgICAgICAgbnBhciAgICBBSUMgICAgQklDICBsb2dMaWsgZGV2aWFuY2UgIENoaXNxIERmIFByKD5DaGlzcSlcbm51bGxfbW9kZWwgICAgNCAxMzQuOTYgMTM3LjUxIC02My40NzggICAxMjYuOTUgICAgICAgICAgICAgICAgICAgICBcbmJhc2VfbW9kZWwgICAgNSAxMjYuMjIgMTI5LjQyIC01OC4xMTAgICAxMTYuMjIgMTAuNzM1ICAxICAgMC4wMDEwNTFcbiAgICAgICAgICAgICBcbm51bGxfbW9kZWwgICBcbmJhc2VfbW9kZWwgKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuIn0= -->
+<pre><code>Data: post_counts
+Subset: post_counts$Condition == &quot;Normal&quot;
+Models:
+null_model: cbind(Int, NoInt) ~ 1 + ((1 + Re) | Subject)
+base_model: cbind(Int, NoInt) ~ Re + ((1 + Re) | Subject)
+           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)
+null_model    4 134.96 137.51 -63.478   126.95                     
+base_model    5 126.22 129.42 -58.110   116.22 10.735  1   0.001051
+             
+null_model   
+base_model **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb29rIGF0IGVmZmVjdCBzaXplXG5wcmludCgnT2xkIHZvY2FsaXplcnMgb24gY29uZnVzaW5nIGRheScpXG5gYGAifQ== -->
+<pre class="r"><code># Look at effect size
+print(&#39;Old vocalizers on confusing day&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiT2xkIHZvY2FsaXplcnMgb24gY29uZnVzaW5nIGRheVwiXG4ifQ== -->
+<pre><code>[1] &quot;Old vocalizers on confusing day&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxub2xkQ29uZnVzaW5nREYgPSBwb3N0X2NvdW50c1twb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ05vcm1hbCcsIF1cbnByaW50KHNwcmludGYoJ051bWJlciBvZiB0cmlhbHM6ICVkJywgc3VtKG9sZENvbmZ1c2luZ0RGJEludCkrc3VtKG9sZENvbmZ1c2luZ0RGJE5vSW50KSkpXG5gYGAifQ== -->
+<pre class="r"><code>oldConfusingDF = post_counts[post_counts$Condition == &#39;Normal&#39;, ]
+print(sprintf(&#39;Number of trials: %d&#39;, sum(oldConfusingDF$Int)+sum(oldConfusingDF$NoInt)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTnVtYmVyIG9mIHRyaWFsczogNDAwN1wiXG4ifQ== -->
+<pre><code>[1] &quot;Number of trials: 4007&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSxcbiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgXG4gICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSlcbiAgICAgICAgICAgICAgKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(sprintf(&#39;Log2(OR) = %.2f [%.2f, %.2f] (95%%)&#39;, log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
               ))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTG9nMihPUikgPSA0Ljg0IFsyLjkyLCA2Ljc2XSAoOTUlKVwiXG4ifQ== -->
+<pre><code>[1] &quot;Log2(OR) = 4.84 [2.92, 6.76] (95%)&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Old vs New</p>
@@ -1891,7 +2077,7 @@ anova(condition_model, base_model)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ291bnQgU3RhdHMgQ29uZnVzaW9uIgpvdXRwdXQ6CiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAotLS0KUiBub3RlYm9vayB0byBwZWZvcm0gR0xNRSBvbiB0aGUgY29uZnVzaW9uIGRhdGEKTG9hZCB0aGUgbWl4ZWQgZWZmZWN0IGxpYnJhcnkKYGBge3IgbGlicmFyaWVzfQpsaWJyYXJ5KGxtZTQpCgpgYGAKClJlYWQgdGhlIGRhdGEKYGBge3IgZGF0YX0Kc2V0d2QoZGlybmFtZShyc3R1ZGlvYXBpOjpnZXRBY3RpdmVEb2N1bWVudENvbnRleHQoKSRwYXRoKSkKZmlsZUluIDwtICcuLi9yZXN1bHRzL3Jlc3VsdHNDb25mdXNpb25SLmNzdicKcG9zdF9jb3VudHMgPC0gcmVhZC5jc3YoZmlsZUluKQoKcG9zdF9jb3VudHMkQ29uZGl0aW9uIDwtIGZhY3Rvcihwb3N0X2NvdW50cyRDb25kaXRpb24pCnBvc3RfY291bnRzJHRyYWluZWRfcmV3YXJkIDwtIGZhY3Rvcihwb3N0X2NvdW50cyR0cmFpbmVkX3Jld2FyZCkKcG9zdF9jb3VudHMkUmUgPC0gZmFjdG9yKHBvc3RfY291bnRzJFJlKQoKc3VtbWFyeShwb3N0X2NvdW50cykKYGBgCgpGaXQgdGhlIG1vZGVscyBmb3IgbGVhcm5pbmcgcGVyaW9kCmBgYHtyIG1vZGVscyBsZWFybmluZ30KbnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCggMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0xlYXJuaW5nJykKYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnTGVhcm5pbmcnKQoKYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbCkKCiMgTG9vayBhdCBlZmZlY3Qgc2l6ZQpwcmludChzcHJpbnRmKCdMb2cyKE9SKSA9ICUuMmYgWyUuMmYsICUuMmZdICg5NSUlKScsIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpLAogICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgLSAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSksIAogICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSkKICAgICAgICAgICAgICApKQpgYGAKCkZpdCBtb2RlbHMgZm9yIG5ldyB2b2NhbGl6ZXJzIGluIGNvbmdydWFudCBkYXkKYGBge3IgbW9kZWxzIG5ldyBjb25ncnVhbnR9Cm51bGxfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gMSArICggKDEgKyBSZSkgfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICduZXdfY29uZ3J1YW50JykKYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnbmV3X2NvbmdydWFudCcpCgphbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKQoKIyBMb29rIGF0IGVmZmVjdCBzaXplCnByaW50KCdOZXcgdm9jYWxpemVycyBvbiBjb25ncnVhbnQgZGF5JykKcHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSwKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpIC0gMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpLCAKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpICsgMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpCiAgICAgICAgICAgICAgKSkKYGBgCk9sZCB2b2NhbGl6ZXJzIG9uIGNvbmdydWFudCBkYXkKYGBge3IgbW9kZWxzIG9sZCBjb25ncnVhbnR9Cm51bGxfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gMSArICggKDEgKyBSZSkgfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdvbGRfY29uZ3J1YW50JykKYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnb2xkX2NvbmdydWFudCcpCgphbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKQoKIyBMb29rIGF0IGVmZmVjdCBzaXplCnByaW50KCdPbGQgdm9jYWxpemVycyBvbiBjb25ncnVhbnQgZGF5JykKcHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSwKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpIC0gMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpLCAKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpICsgMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpCiAgICAgICAgICAgICAgKSkKYGBgCklzIHRoZXJlIGEgZGlmZmVyZW5jZSBiZXR3ZWVuIG9sZCBhbmQgbmV3PwpgYGB7ciBDb25ncnVlbnQgbmV3IHZzIG9sZH0KYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ29sZF9jb25ncnVhbnQnKSB8IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ25ld19jb25ncnVhbnQnKSApCmNvbmRpdGlvbl9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSpDb25kaXRpb24gKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSAocG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdvbGRfY29uZ3J1YW50JykgfCAocG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICduZXdfY29uZ3J1YW50JykgKQojIFRlc3QgZm9yIGRpZmZlcmVuY2VzIGluIG5ldyB2cyBvbGQKYW5vdmEoY29uZGl0aW9uX21vZGVsLCBiYXNlX21vZGVsKQpgYGAKCk5ldyBjb25mdXNpbmcKYGBge3IgbW9kZWxzIG5ldyBjb25mdXNpbmd9Cm51bGxfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gMSArICggKDEgKyBSZSkgfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdDb25mdXNpbmcnKQpiYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdDb25mdXNpbmcnKQoKYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbCkKCiMgTG9vayBhdCBlZmZlY3Qgc2l6ZQpwcmludCgnTmV3IHZvY2FsaXplcnMgb24gY29uZnVzaW5nIGRheScpCnByaW50KHNwcmludGYoJ0xvZzIoT1IpID0gJS4yZiBbJS4yZiwgJS4yZl0gKDk1JSUpJywgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSksCiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgCiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSArIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKQogICAgICAgICAgICAgICkpCmBgYAoKT2xkIENvbmZ1c2luZwpgYGB7ciBtb2RlbHMgb2xkIGNvbmZ1c2luZ30KbnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ05vcm1hbCcpCmJhc2VfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ05vcm1hbCcpCgphbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKQoKIyBMb29rIGF0IGVmZmVjdCBzaXplCnByaW50KCdPbGQgdm9jYWxpemVycyBvbiBjb25mdXNpbmcgZGF5JykKcHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSwKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpIC0gMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpLCAKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpICsgMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpCiAgICAgICAgICAgICAgKSkKYGBgCgpPbGQgdnMgTmV3CmBgYCB7ciBJbmNvbmdydWVudCBuZXcgdnMgb2xkfQpiYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gKHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnTm9ybWFsJykgfCAocG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdDb25mdXNpbmcnKSApCmNvbmRpdGlvbl9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSpDb25kaXRpb24gKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSAocG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdOb3JtYWwnKSB8IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycpICkKIyBUZXN0IGZvciBkaWZmZXJlbmNlcyBpbiBuZXcgdnMgb2xkCmFub3ZhKGNvbmRpdGlvbl9tb2RlbCwgYmFzZV9tb2RlbCkKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ291bnQgU3RhdHMgQ29uZnVzaW9uIgpvdXRwdXQ6CiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAotLS0KUiBub3RlYm9vayB0byBwZWZvcm0gR0xNRSBvbiB0aGUgY29uZnVzaW9uIGRhdGEKTG9hZCB0aGUgbWl4ZWQgZWZmZWN0IGxpYnJhcnkKYGBge3IgbGlicmFyaWVzfQpsaWJyYXJ5KGxtZTQpCgpgYGAKClJlYWQgdGhlIGRhdGEKYGBge3IgZGF0YX0Kc2V0d2QoZGlybmFtZShyc3R1ZGlvYXBpOjpnZXRBY3RpdmVEb2N1bWVudENvbnRleHQoKSRwYXRoKSkKZmlsZUluIDwtICcuLi9yZXN1bHRzL3Jlc3VsdHNDb25mdXNpb25SLmNzdicKcG9zdF9jb3VudHMgPC0gcmVhZC5jc3YoZmlsZUluKQoKcG9zdF9jb3VudHMkQ29uZGl0aW9uIDwtIGZhY3Rvcihwb3N0X2NvdW50cyRDb25kaXRpb24pCnBvc3RfY291bnRzJHRyYWluZWRfcmV3YXJkIDwtIGZhY3Rvcihwb3N0X2NvdW50cyR0cmFpbmVkX3Jld2FyZCkKcG9zdF9jb3VudHMkUmUgPC0gZmFjdG9yKHBvc3RfY291bnRzJFJlKQoKc3VtbWFyeShwb3N0X2NvdW50cykKYGBgCgpGaXQgdGhlIG1vZGVscyBmb3IgbGVhcm5pbmcgcGVyaW9kCmBgYHtyIG1vZGVscyBsZWFybmluZ30KbnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCggMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0xlYXJuaW5nJykKYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnTGVhcm5pbmcnKQoKYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbCkKCiMgTG9vayBhdCBlZmZlY3Qgc2l6ZQpsZWFybmluZ0RGID0gcG9zdF9jb3VudHNbcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdMZWFybmluZycsIF0KcHJpbnQoc3ByaW50ZignTnVtYmVyIG9mIHRyaWFsczogJWQnLCBzdW0obGVhcm5pbmdERiRJbnQpK3N1bShsZWFybmluZ0RGJE5vSW50KSkpCnByaW50KHNwcmludGYoJ0xvZzIoT1IpID0gJS4yZiBbJS4yZiwgJS4yZl0gKDk1JSUpJywgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSksCiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgCiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSArIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKQogICAgICAgICAgICAgICkpCmBgYAoKRml0IG1vZGVscyBmb3IgbmV3IHZvY2FsaXplcnMgaW4gY29uZ3J1YW50IGRheQpgYGB7ciBtb2RlbHMgbmV3IGNvbmdydWFudH0KbnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ25ld19jb25ncnVhbnQnKQpiYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICduZXdfY29uZ3J1YW50JykKCmFub3ZhKG51bGxfbW9kZWwsIGJhc2VfbW9kZWwpCgojIExvb2sgYXQgZWZmZWN0IHNpemUKcHJpbnQoJ05ldyB2b2NhbGl6ZXJzIG9uIGNvbmdydWFudCBkYXknKQpuZXdDb25ncnVhbnRERiA9IHBvc3RfY291bnRzW3Bvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnbmV3X2NvbmdydWFudCcsIF0KcHJpbnQoc3ByaW50ZignTnVtYmVyIG9mIHRyaWFsczogJWQnLCBzdW0obmV3Q29uZ3J1YW50REYkSW50KStzdW0obmV3Q29uZ3J1YW50REYkTm9JbnQpKSkKCnByaW50KHNwcmludGYoJ0xvZzIoT1IpID0gJS4yZiBbJS4yZiwgJS4yZl0gKDk1JSUpJywgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSksCiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSAtIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKSwgCiAgICAgICAgICBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSArIDIqbG9nMihleHAoc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMl0pKQogICAgICAgICAgICAgICkpCmBgYApPbGQgdm9jYWxpemVycyBvbiBjb25ncnVhbnQgZGF5CmBgYHtyIG1vZGVscyBvbGQgY29uZ3J1YW50fQpudWxsX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IDEgKyAoICgxICsgUmUpIHxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnb2xkX2NvbmdydWFudCcpCmJhc2VfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ29sZF9jb25ncnVhbnQnKQoKYW5vdmEobnVsbF9tb2RlbCwgYmFzZV9tb2RlbCkKCiMgTG9vayBhdCBlZmZlY3Qgc2l6ZQpwcmludCgnT2xkIHZvY2FsaXplcnMgb24gY29uZ3J1YW50IGRheScpCm9sZENvbmdydWFudERGID0gcG9zdF9jb3VudHNbcG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdvbGRfY29uZ3J1YW50JywgXQpwcmludChzcHJpbnRmKCdOdW1iZXIgb2YgdHJpYWxzOiAlZCcsIHN1bShvbGRDb25ncnVhbnRERiRJbnQpK3N1bShvbGRDb25ncnVhbnRERiROb0ludCkpKQpwcmludChzcHJpbnRmKCdMb2cyKE9SKSA9ICUuMmYgWyUuMmYsICUuMmZdICg5NSUlKScsIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpLAogICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgLSAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSksIAogICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSkKICAgICAgICAgICAgICApKQpgYGAKSXMgdGhlcmUgYSBkaWZmZXJlbmNlIGJldHdlZW4gb2xkIGFuZCBuZXc/CmBgYHtyIENvbmdydWVudCBuZXcgdnMgb2xkfQpiYXNlX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlICsgKCgxICsgUmUpfFN1YmplY3QpJywgZGF0YSA9IHBvc3RfY291bnRzLCBmYW1pbHkgPSBiaW5vbWlhbCwgc3Vic2V0ID0gKHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnb2xkX2NvbmdydWFudCcpIHwgKHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnbmV3X2NvbmdydWFudCcpICkKY29uZGl0aW9uX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlKkNvbmRpdGlvbiArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ29sZF9jb25ncnVhbnQnKSB8IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ25ld19jb25ncnVhbnQnKSApCiMgVGVzdCBmb3IgZGlmZmVyZW5jZXMgaW4gbmV3IHZzIG9sZAphbm92YShjb25kaXRpb25fbW9kZWwsIGJhc2VfbW9kZWwpCmBgYAoKTmV3IGNvbmZ1c2luZwpgYGB7ciBtb2RlbHMgbmV3IGNvbmZ1c2luZ30KbnVsbF9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiAxICsgKCAoMSArIFJlKSB8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycpCmJhc2VfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSBwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycpCgphbm92YShudWxsX21vZGVsLCBiYXNlX21vZGVsKQoKIyBMb29rIGF0IGVmZmVjdCBzaXplCnByaW50KCdOZXcgdm9jYWxpemVycyBvbiBjb25mdXNpbmcgZGF5JykKbmV3Q29uZnVzaW5nREYgPSBwb3N0X2NvdW50c1twb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycsIF0KcHJpbnQoc3ByaW50ZignTnVtYmVyIG9mIHRyaWFsczogJWQnLCBzdW0obmV3Q29uZnVzaW5nREYkSW50KStzdW0obmV3Q29uZnVzaW5nREYkTm9JbnQpKSkKcHJpbnQoc3ByaW50ZignTG9nMihPUikgPSAlLjJmIFslLjJmLCAlLjJmXSAoOTUlJSknLCBsb2cyKGV4cCgtc3VtbWFyeShiYXNlX21vZGVsKSRjb2VmWzIsMV0pKSwKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpIC0gMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpLCAKICAgICAgICAgIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpICsgMipsb2cyKGV4cChzdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwyXSkpCiAgICAgICAgICAgICAgKSkKYGBgCgpPbGQgQ29uZnVzaW5nCmBgYHtyIG1vZGVscyBvbGQgY29uZnVzaW5nfQpudWxsX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IDEgKyAoICgxICsgUmUpIHxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnTm9ybWFsJykKYmFzZV9tb2RlbCA8LSBnbG1lcignY2JpbmQoSW50LCBOb0ludCkgfiBSZSArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnTm9ybWFsJykKCmFub3ZhKG51bGxfbW9kZWwsIGJhc2VfbW9kZWwpCgojIExvb2sgYXQgZWZmZWN0IHNpemUKcHJpbnQoJ09sZCB2b2NhbGl6ZXJzIG9uIGNvbmZ1c2luZyBkYXknKQpvbGRDb25mdXNpbmdERiA9IHBvc3RfY291bnRzW3Bvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnTm9ybWFsJywgXQpwcmludChzcHJpbnRmKCdOdW1iZXIgb2YgdHJpYWxzOiAlZCcsIHN1bShvbGRDb25mdXNpbmdERiRJbnQpK3N1bShvbGRDb25mdXNpbmdERiROb0ludCkpKQpwcmludChzcHJpbnRmKCdMb2cyKE9SKSA9ICUuMmYgWyUuMmYsICUuMmZdICg5NSUlKScsIGxvZzIoZXhwKC1zdW1tYXJ5KGJhc2VfbW9kZWwpJGNvZWZbMiwxXSkpLAogICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgLSAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSksIAogICAgICAgICAgbG9nMihleHAoLXN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDFdKSkgKyAyKmxvZzIoZXhwKHN1bW1hcnkoYmFzZV9tb2RlbCkkY29lZlsyLDJdKSkKICAgICAgICAgICAgICApKQpgYGAKCk9sZCB2cyBOZXcKYGBgIHtyIEluY29uZ3J1ZW50IG5ldyB2cyBvbGR9CmJhc2VfbW9kZWwgPC0gZ2xtZXIoJ2NiaW5kKEludCwgTm9JbnQpIH4gUmUgKyAoKDEgKyBSZSl8U3ViamVjdCknLCBkYXRhID0gcG9zdF9jb3VudHMsIGZhbWlseSA9IGJpbm9taWFsLCBzdWJzZXQgPSAocG9zdF9jb3VudHMkQ29uZGl0aW9uID09ICdOb3JtYWwnKSB8IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ0NvbmZ1c2luZycpICkKY29uZGl0aW9uX21vZGVsIDwtIGdsbWVyKCdjYmluZChJbnQsIE5vSW50KSB+IFJlKkNvbmRpdGlvbiArICgoMSArIFJlKXxTdWJqZWN0KScsIGRhdGEgPSBwb3N0X2NvdW50cywgZmFtaWx5ID0gYmlub21pYWwsIHN1YnNldCA9IChwb3N0X2NvdW50cyRDb25kaXRpb24gPT0gJ05vcm1hbCcpIHwgKHBvc3RfY291bnRzJENvbmRpdGlvbiA9PSAnQ29uZnVzaW5nJykgKQojIFRlc3QgZm9yIGRpZmZlcmVuY2VzIGluIG5ldyB2cyBvbGQKYW5vdmEoY29uZGl0aW9uX21vZGVsLCBiYXNlX21vZGVsKQpgYGAKCg==</div>
 
 
 

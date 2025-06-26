@@ -28,6 +28,8 @@ Fit the models
 ```{r models}
 null_model <- glmer('cbind(Int, NoInt) ~ 1 + ( (1 +Re) |Bird)', data = post_counts, family = binomial)
 base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Bird)', data = post_counts, family = binomial)
+base_model_male <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Bird)', data = post_counts, family = binomial, subset = post_counts$Sex == 'M')
+base_model_female <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Bird)', data = post_counts, family = binomial, subset = post_counts$Sex == 'F')
 callType_model <- glmer('cbind(Int, NoInt) ~ Re*Call + ((1 + Re)|Bird)', data = post_counts, family = binomial)
 sex_model <- glmer('cbind(Int, NoInt) ~ Re*Sex + ((1 + Re)|Bird)', data = post_counts, family = binomial)
 
@@ -39,8 +41,23 @@ Averaged across all call types can birds tell one vs all other?
 anova(null_model, base_model)
 
 # Look at effect size
-print(sprintf('Log2(OR) = %.2f +- %.3f (2SE)', log2(exp(-summary(base_model)$coef[2,1])),
-                  2*log2(exp(summary(base_model)$coef[2,2]))))
+print(sprintf('N = %d', sum(post_counts$Int) + sum(post_counts$NoInt)))
+print(sprintf('Log2(OR) = %.2f [%.3f, %.3f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
+                  log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])),
+                log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
+              ))
+
+print('---------Male Birds --------------------')
+print(sprintf('Log2(OR) = %.2f [%.3f, %.3f] (95%%)', log2(exp(-summary(base_model_male)$coef[2,1])),
+                  log2(exp(-summary(base_model_male)$coef[2,1])) - 2*log2(exp(summary(base_model_male)$coef[2,2])),
+                log2(exp(-summary(base_model_male)$coef[2,1])) + 2*log2(exp(summary(base_model_male)$coef[2,2]))
+              ))
+
+print('---------Female Birds --------------------')
+print(sprintf('Log2(OR) = %.2f [%.3f, %.3f] (95%%)', log2(exp(-summary(base_model_female)$coef[2,1])),
+                  log2(exp(-summary(base_model_female)$coef[2,1])) - 2*log2(exp(summary(base_model_female)$coef[2,2])),
+                log2(exp(-summary(base_model_female)$coef[2,1])) + 2*log2(exp(summary(base_model_female)$coef[2,2]))
+              ))
 
 ```
 

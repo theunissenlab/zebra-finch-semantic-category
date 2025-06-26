@@ -46,7 +46,8 @@ for (rit in unique(new_counts$RIT)) {
   }
   subject.list <- unique(new_counts.rit$Subject) # recreating the list in case some subjects are deleted.
   # The two models
-  print(sprintf('n = %d', nrow(new_counts.rit)/2))
+  print(sprintf('n = %d birds', nrow(new_counts.rit)/2))
+  print(sprintf('ntrials = %d', sum(new_counts.rit$Int) + sum(new_counts.rit$NoInt) ))
   if ( sum(new_counts.rit[new_counts.rit$Re == 'Y',]$Int) == 0 ) {
     print('Warning: Interruption prop is zero for new stimuli. Adding an interrupted trial to 1 subject for both Re and NoRe')
     sub.fix = subject.list[1]
@@ -77,6 +78,8 @@ for (rit in unique(new_counts$RIT)) {
   
   # The two models
   print(sprintf('n = %d', nrow(old_counts.rit)/2))
+  print(sprintf('ntrials = %d', sum(old_counts.rit$Int) + sum(old_counts.rit$NoInt) ))
+  
   if ( sum(old_counts.rit[old_counts.rit$Re == 'Y',]$Int) == 0 ) {
     print('Warning: Interruption prop is zero for old stimuli - adding 1 intteruption for both Re and NoRe to one subject')
     sub.fix = subject.list[1]
@@ -138,6 +141,7 @@ for (rit in unique(new_counts$RIT)) {
   subject.list <- unique(new_counts.rit$Subject)
   
   print(sprintf('n = %d', nrow(new_counts.rit)/2))
+  print(sprintf('ntrials = %d', sum(new_counts.rit$Int) + sum(new_counts.rit$NoInt) ))
   if ( sum(new_counts.rit[new_counts.rit$Re == 'Y',]$Int) == 0 ) {
     print('Warning: Interruption prop is zero for new stimuli. Adding an interrupted trial to 1 subject for both Re and NoRe')
     sub.fix = subject.list[1]
@@ -170,6 +174,7 @@ for (rit in unique(new_counts$RIT)) {
   
     # The two models
   print(sprintf('n = %d', nrow(old_counts.rit)/2))
+  print(sprintf('ntrials = %d', sum(old_counts.rit$Int) + sum(old_counts.rit$NoInt) ))
   if ( sum(old_counts.rit[old_counts.rit$Re == 'Y',]$Int) == 0 ) {
     print('Warning: Interruption prop is zero for old stimuli - adding 1 intteruption for both Re and NoRe to one subject')
     sub.fix = subject.list[1]

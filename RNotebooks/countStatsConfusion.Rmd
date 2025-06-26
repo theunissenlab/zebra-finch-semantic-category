@@ -32,6 +32,8 @@ base_model <- glmer('cbind(Int, NoInt) ~ Re + ((1 + Re)|Subject)', data = post_c
 anova(null_model, base_model)
 
 # Look at effect size
+learningDF = post_counts[post_counts$Condition == 'Learning', ]
+print(sprintf('Number of trials: %d', sum(learningDF$Int)+sum(learningDF$NoInt)))
 print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
@@ -47,6 +49,9 @@ anova(null_model, base_model)
 
 # Look at effect size
 print('New vocalizers on congruant day')
+newCongruantDF = post_counts[post_counts$Condition == 'new_congruant', ]
+print(sprintf('Number of trials: %d', sum(newCongruantDF$Int)+sum(newCongruantDF$NoInt)))
+
 print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
@@ -61,6 +66,8 @@ anova(null_model, base_model)
 
 # Look at effect size
 print('Old vocalizers on congruant day')
+oldCongruantDF = post_counts[post_counts$Condition == 'old_congruant', ]
+print(sprintf('Number of trials: %d', sum(oldCongruantDF$Int)+sum(oldCongruantDF$NoInt)))
 print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
@@ -83,6 +90,8 @@ anova(null_model, base_model)
 
 # Look at effect size
 print('New vocalizers on confusing day')
+newConfusingDF = post_counts[post_counts$Condition == 'Confusing', ]
+print(sprintf('Number of trials: %d', sum(newConfusingDF$Int)+sum(newConfusingDF$NoInt)))
 print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
@@ -98,6 +107,8 @@ anova(null_model, base_model)
 
 # Look at effect size
 print('Old vocalizers on confusing day')
+oldConfusingDF = post_counts[post_counts$Condition == 'Normal', ]
+print(sprintf('Number of trials: %d', sum(oldConfusingDF$Int)+sum(oldConfusingDF$NoInt)))
 print(sprintf('Log2(OR) = %.2f [%.2f, %.2f] (95%%)', log2(exp(-summary(base_model)$coef[2,1])),
           log2(exp(-summary(base_model)$coef[2,1])) - 2*log2(exp(summary(base_model)$coef[2,2])), 
           log2(exp(-summary(base_model)$coef[2,1])) + 2*log2(exp(summary(base_model)$coef[2,2]))
